@@ -97,7 +97,7 @@ pipeline {
             steps {
                 dir("${ANSIBLE_PROJECT_WORKSPACE_PATH}"){
                     script {
-                      sh "ansible-playbook /home/ubuntu/yash/main.yml"
+                      sh "sudo ansible-playbook /home/ubuntu/yash/main.yml"
 
 		            }
 				}
