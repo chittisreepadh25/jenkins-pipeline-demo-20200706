@@ -93,7 +93,7 @@ pipeline {
 		    }
 		}
 	    		stage ('Deployment') {
-	    agent { label 'ansible-demo' }
+	    agent { label 'Ansible-demo' }
             steps {
                 dir("${ANSIBLE_PROJECT_WORKSPACE_PATH}"){
                     script {
