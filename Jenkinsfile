@@ -26,6 +26,7 @@ pipeline {
     agent {label 'master'}
     environment {
         PROJECT_WORKSPACE_PATH = "/var/lib/jenkins/workspace/${getRepoFolderName().toString().toUpperCase()}/";
+	ANSIBLE_PROJECT_WORKSPACE_PATH = "/opt/jenkins"
     }
     stages {
         stage('Cleanup') {
@@ -85,12 +86,24 @@ pipeline {
             steps {
                 dir("${PROJECT_WORKSPACE_PATH}"){
                     script {
-                      nexusPublisher nexusInstanceId: 'Nexus_3.x', nexusRepositoryId: 'sample_jpetstore', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: './target/jpetstore.war']], mavenCoordinate: [artifactId: 'maven-jpetstore', groupId: 'maven-org.mybatis', packaging: 'war', version: 'maven-6.0.2-SNAPSHOT']]]
+                      nexusPublisher nexusInstanceId: 'Nexus_3.x', nexusRepositoryId: 'sample_jpetstore', packages: [[$class: 'MavenPackage', mavenAssetList: [[classifier: '', extension: '', filePath: './target/jpetstore.war']], mavenCoordinate: [artifactId: 'maven-jpetstore', groupId: 'maven-org.mybatis', packaging: 'war', version: 'maven-6.0.7-SNAPSHOT']]]
 
 		            }
 				}
 		    }
 		}
+	    		stage ('Deployment') {
+	    agent { label 'ansible-demo' }
+            steps {
+                dir("${ANSIBLE_PROJECT_WORKSPACE_PATH}"){
+                    script {
+                      sh "ansible-playbook /home/ubuntu/yash/main.yml"
+
+		            }
+				}
+		    }
+		}
+	  
     }
 //Post build action send email in both cases
 post {
