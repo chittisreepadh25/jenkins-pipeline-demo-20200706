@@ -15,7 +15,7 @@ def getRepoFolderName()
 def sendEmail()
 {
     mailRecipients = "schitti2@dxc.com"
-    emailext body: '''$PROJECT_NAME - Build # $BUILD_NUMBER - $BUILD_STATUS: Check console output at $BUILD_URL to view the results.''',
+    emailext body: '''${SCRIPT, template="bsl-email.template"}''',
     mimeType: 'text/html',
     subject: "${currentBuild.fullDisplayName} - Build ${currentBuild.result}",
     to: "${mailRecipients}",
