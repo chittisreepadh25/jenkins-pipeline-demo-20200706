@@ -92,17 +92,6 @@ pipeline {
 				}
 		    }
 		}
-	    		stage ('Deployment') {
-	    agent { label 'Ansible-demo' }
-            steps {
-                dir("${ANSIBLE_PROJECT_WORKSPACE_PATH}"){
-                    script {
-                      sh "sudo ansible-playbook /home/ubuntu/yash/main.yml"
-
-		            }
-				}
-		    }
-		}
 	  
     }
 //Post build action send email in both cases
