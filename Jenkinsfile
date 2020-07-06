@@ -26,7 +26,7 @@ pipeline {
     agent {label 'master'}
     environment {
         PROJECT_WORKSPACE_PATH = "/var/lib/jenkins/workspace/${getRepoFolderName().toString().toUpperCase()}/";
-	ANSIBLE_PROJECT_WORKSPACE_PATH = "/opt/jenkins"
+	ANSIBLE_PROJECT_WORKSPACE_PATH = "/opt/Jenkins_workspace"
     }
     stages {
         stage('Cleanup') {
